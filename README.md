@@ -11,7 +11,7 @@ In order to accomplish the motions that I described in the previous paragraph, I
 
 ## GIF
 
-![Going Around in Squares GIF](https://imgur.com/a/EqXODEI)
+![Going Around in Squares GIF](DrivingSquare.gif)
 
 ## Challenges
 
