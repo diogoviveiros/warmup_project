@@ -19,7 +19,7 @@ from geometry_msgs.msg import Vector3
 distance = 0.4
 
 class FollowPerson(object):
-    """ This node walks the robot to wall and stops """
+    
 
     def __init__(self):
         # Start rospy node.
@@ -53,20 +53,21 @@ class FollowPerson(object):
         min_dist = math.inf
         angle = 0
 
+        #Checks the angle in LIDAR which has the smallest distance
         for i in range(360):
             if(data.ranges[i] <= min_dist and data.ranges[i] != 0.0):
                 min_dist = data.ranges[i]
                 angle = i
 
-                
-        
+         
+        #Rotate in direction where the distance is lowest (determined above)
         self.twist.angular.z = math.sin(math.radians(angle))
         
             
         self.twist_pub.publish(self.twist)
         
             
-
+        #If the robot has an obstacle directly ahead, stop. Otherwise, keep moving forwards!
         if(data.ranges[0] == 0.0 or data.ranges[0]
          >= distance):
             self.twist.linear.x = 0.1
