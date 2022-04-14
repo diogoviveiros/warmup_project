@@ -40,7 +40,7 @@ While in drive in a square I had three specific functions that did the same thin
 
 ## GIF
 
-![Following Person GIF](DrivingSquare.gif)
+![Following Person GIF](FollowingPerson.gif)
 
 ## Challenges
 
@@ -68,7 +68,7 @@ For the wall follower, I used similar code to that of the person follower, where
 
 ## GIF
 
-![Following Wall GIF](DrivingSquare.gif)
+![Following Wall GIF](FollowingWall.gif)
 
 ## Challenges
 
