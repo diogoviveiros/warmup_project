@@ -1,3 +1,4 @@
+﻿
 # Introduction to Robotics: Warmup Lab (Diogo Viveiros)
 
 
@@ -30,9 +31,56 @@ Had I had more time to improve the behavior a little bit, I would have modified 
 
 # Person Follower
 
-Coming soon!
+Making a robot follow a person was a more challenging task. Utilizing the sensors was a little bit more tricky, and therefore I had to learn new things in the process as well. 
+
+## Code Explanation
+
+While in drive in a square I had three specific functions that did the same thing, for person follower I had to make my code a little more maleable. What I mean by this is that the robot now has to adapt to the exact position where the closest moving object (the person) is. I accomplished this by analyzing all the 360 distance values that the LIDAR sensor outputs, and finding the minimum value from those. With that, I have the angle in which the robot should rotate towards, and it can therefore spin in that direction. If the robot sees that the person is directly in front of it and at a small distance of half a meter, then the robot will stop. If the person increases their distance, the robot will start moving again to keep following them. 
+
+
+## GIF
+
+![Following Person GIF](DrivingSquare.gif)
+
+## Challenges
+
+Compared to Drive in a Square, I had to change how I viewed how to control my Turtlebot in order for it to work properly. The biggest challenge was to try and make my movements not be "lagged". I eventually figured out that htis was happening because I was using rospy.sleep() like in Drive in a Square. However, with the constant adjustments that the Turtlebot would have to make in order to follow a person accurately, using sleep would create too much of a lag as the queue of objects would continuously increase and the Turtlebot would never be reacting properly to what it was scanning. I therefore had to find a way to control the Turtlebot without using sleep, which was initially challenging, but I eventually got the hang of!
+
+## Future Work
+
+In the future, I would like to make the robot a little bit more reactive to me turning, as right now there is some lag in me moving and the Turtlebot actually following me. I also think it would be really cool to use the camera and OpenCV to potentially add some kind of person tracking, where the robot only follows a specific person! It would add a sense of camaraderie between the robot and its user. 
+
+## Takeaways
+
+ - Delays are sometimes not the answer, as they can severely hamper the robot's ability to synchronize its movements with its sensing capabilities. This is particularly true with something like the LIDAR sensor which is updating at a fairly high frequency.
+ - If-Conditions can be powerful in controlling logic for the Turtlebot. 
+
 
 # Wall Follower
 
 
-Coming soon!
+The wall follower was an extremely complex project that I quite honestly struggled with for a while, until I implemented the delta error which allowed the robot to always be at a 90 degree angle in comparison to the wall. This allowed the robot to have proportional control and keep a constant distance to the wall. 
+
+## Code Explanation
+
+For the wall follower, I used similar code to that of the person follower, where I am checking all of the LIDAR's distance values and finding the minimum one. If the robot has no wall right in front of it, it will move forwards.  Else, if it's angle to the minimum distance to the wall is not 90 degrees, it will rotate until it is. This allows the robot to alwas have a proportional distance to the wall while also being able to spin and follow the wall properly. 
+
+
+## GIF
+
+![Following Wall GIF](DrivingSquare.gif)
+
+## Challenges
+
+It took me quite a while to realize how I should be using the error. Then, it took me a little bit longer to adjust the error values properly and optimize the number of if-conditions that I needed in order for the robot to work properly (it turned out to be zero, I was stuck in thinking that I actually needed to utilize if conditions in order to add the logic that I needed when I really didn't have to). This was a lot of trial and error, and did take quite a long time. I got it to work eventually though. 
+
+## Future Work
+
+I think in the future, I would like the Turtlebot to move in both clockwise and anti-clockwise directiosn across the wall. This would allow us much more control and flexibility with how we control the robot!
+
+## Takeaways
+
+ - Error deltas are a good and powerful way to allow us to control the robot and maintain proportionality, partiuclarly when taking into account things such as proper spin control. 
+ - Small changes to conditions, such as distance or even if-parameters, can have a very large change in how the Turtlebot reacts. 
+ - If-conditions are not always the solution. Sometimes having a simpler loop can actually be better!
+
