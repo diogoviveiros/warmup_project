@@ -56,72 +56,24 @@ class FollowWall(object):
         angle =  90
         
 
+        #Check for minimum distance in angle
         for i in range(360):
             if(data.ranges[i] <= min_dist and data.ranges[i] != 0.0):
                 min_dist = data.ranges[i]
                 angle = i
 
+        #Find the delta between minimum distance and 90 degrees
         delta = angle - 90
         kp = 0.3 * delta
 
-        """
-        if(data.ranges[0] >= distance or data.ranges[0] == 0.0):
-                  
-            #Turn Left
-            self.twist.angular.z = 0        
-            #print(self.twist.angular.z)
-            self.twist.linear.x = 0.1
-            print("If cond")
-            
-            
-        else:
-
-        """
+        #Rotate to that position and keep moving forwards slowly
         self.twist.angular.z = math.radians(kp)
-        #print(self.twist.angular.z)
         self.twist.linear.x = 0.05
-        #print("EEEEEEEElse cond")
-            
-
-
-        """
-        if(data.ranges[45] <= lateral_distance and data.ranges[45] != 0.0):
-            self.twist.angular.z = math.sin(math.radians(kp))
-            print(self.twist.angular.z)
-            self.twist.linear.x = 0
-            print("Condition 1")
-        elif (data.ranges[315] <= lateral_distance and data.ranges[315] != 0.0):
-            self.twist.angular.z = math.sin(math.radians(10 * data.ranges[315] - distance))
-            print(self.twist.angular.z)
-            self.twist.linear.x = 0
-            print("Condition 2")
-
-        elif ( (data.ranges[0] >= distance or data.ranges[0] == 0.0)):
-            # Go forward if not close enough to wall.
-            
-            self.twist.angular.z = 0
-            self.twist.linear.x = 0.1
-            
-            print("Condition 3")
-
-        elif(data.ranges[0] <= distance and (data.ranges[45] < data.ranges[315]) ):
-                  
-            #Turn Left
-            self.twist.angular.z = math.sin(math.radians(100 * data.ranges[45] - data.ranges[315]))
-            print(self.twist.angular.z)
-            self.twist.linear.x = 0
-            
-            print("Condition 4")
         
-        elif(data.ranges[0] <= distance and (data.ranges[315] < data.ranges[45])):
-            #Turn right
-            self.twist.angular.z = math.sin(math.radians(100 * data.ranges[315] - data.ranges[45]))
-            print(self.twist.angular.z)
-            self.twist.linear.x = 0
             
-            print("Condition 5")
-        
-        """
+
+
+      
 
         
         self.twist_pub.publish(self.twist)
